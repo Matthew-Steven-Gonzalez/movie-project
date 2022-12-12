@@ -28,8 +28,8 @@ function getMovies(){
                 // html += "<div id='moviePoster'></div>";
                 html += "<h2 class='text-center'>" + report[i].title + "</h2>";
                 html += "<img src='" + report[i].image + "' class='image mx-auto ' alt='Movie Poster'>";
-                html += "<ul class='list-group '>";
-                html += "<li class='list-group-item' id='rating'><div class='rating'>";
+                html += "<ul class='list-group  '>";
+                html += "<li class='list-group-item ' id='rating'><div class='rating'>";
                 html += "<i class='rating__star far fa-star'></i>"
                 html += "<i class='rating__star far fa-star'></i>"
                 html += "<i class='rating__star far fa-star'></i>"
