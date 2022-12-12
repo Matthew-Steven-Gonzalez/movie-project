@@ -1,29 +1,5 @@
 "use strict";
 
-const searchbtn = document.getElementById("newMovieButton");
-
-searchbtn.addEventListener("click", () => {
-    function addAMovie(Title, Director) {
-        const reviewObj = {
-            title: Title,
-            director: Director,
-            rating: 5,
-            comments: "Please add a review"
-        };
-        const url = 'https://foregoing-dashing-gibbon.glitch.me/movies';
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(reviewObj),
-        };
-        fetch(url, options)
-            .then(response => console.log(response)) /* review was created successfully */
-            .catch(error => console.error(error)); /* handle errors */
-    }
-});
-
 function getMovies() {
     let loader = `<div class="loading text-center"><h1 class="fs-1">Loading...</h1></div>`
     document.getElementById('movieCards').innerHTML = loader;
@@ -33,7 +9,6 @@ function getMovies() {
             console.log(data);
             let report = data;
             for (let i = 0; i < report.length; i++) {
-                console.log(data[i].title);
                 let html = "<div class='card movieCard col-10 mx-auto'>";
                 html += "<h2 class='text-center mt-1' id='MovieTitle'>" + report[i].title + "</h2>";
                 html += "<img src='" + report[i].image + "' class='image mx-auto' alt='Movie Poster'>";
@@ -50,8 +25,10 @@ function getMovies() {
                 html += "</div>"
                 html += "<div>";
                 html += "<h5 class='text-center'>" + report[i].genre + "</h5>";
-                html += "<p class='text-center'>" + report[i].comments + " </p>"
+                html += "<p class='text-center'>" + report[i].plot + " </p>"
+                html += "<h6 class='text-center'>" + report[i].director + " </h6>"
                 html += "</div>";
+                html += "<button class='w-25 mx-auto'>Delete</button>"
                 html += "</div>";
 
                 $('#movieCards').append(html)
@@ -64,20 +41,24 @@ function getMovies() {
         })
 }
 
-function addAMovie(Title, Director) {
-    const reviewObj = {
-        title: Title,
-        director: Director
-        // rating: 5,
-        // comments: "Please add a review"
-    };
+function addAMovie(movie) {
     const url = 'https://foregoing-dashing-gibbon.glitch.me/movies';
     const options = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(reviewObj),
+        body: JSON.stringify(movie),
+    };
+    fetch(url, options)
+        .then(response => console.log(response)) /* review was created successfully */
+        .catch(error => console.error(error)); /* handle errors */
+}
+
+function deleteAMovie(index){
+    const url = 'https://foregoing-dashing-gibbon.glitch.me/movies/'+index +'';
+    const options = {
+        method: 'delete',
     };
     fetch(url, options)
         .then(response => console.log(response)) /* review was created successfully */
@@ -85,14 +66,14 @@ function addAMovie(Title, Director) {
 }
 
 getMovies();
-// addAMovie("Troy","Joe Russo");
 
-$('#newMovieButton').click(()=>{
-    let movie = {};
-    movie.title = $('#Title').value;
-    movie.director = $('#Director').value;
-    addAMovie(Title,Director);
-    getMovies();
+$('#newMovieButton').click((e)=>{
+    e.preventDefault();
+    let movie ={};
+    movie.title = $('#Title').val();
+    movie.director = $('#Director').val();
+    console.log(movie);
+    addAMovie(movie);
 })
 
 
