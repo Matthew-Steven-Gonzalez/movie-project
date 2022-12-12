@@ -1,0 +1,4 @@
+#addAMovieForm{
+    display: flex;
+    flex-direction: column;
+}
