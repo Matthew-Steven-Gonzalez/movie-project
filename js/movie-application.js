@@ -67,9 +67,9 @@ function getMovies() {
 function addAMovie(Title, Director) {
     const reviewObj = {
         title: Title,
-        director: Director,
-        rating: 5,
-        comments: "Please add a review"
+        director: Director
+        // rating: 5,
+        // comments: "Please add a review"
     };
     const url = 'https://foregoing-dashing-gibbon.glitch.me/movies';
     const options = {
@@ -85,13 +85,15 @@ function addAMovie(Title, Director) {
 }
 
 getMovies();
+// addAMovie("Troy","Joe Russo");
 
-addAMovie("avengers","Joe Russo");
+$('#newMovieButton').click(()=>{
+    let movie = {};
+    movie.title = $('#Title').value;
+    movie.director = $('#Director').value;
+    addAMovie(Title,Director);
+    getMovies();
+})
 
-// $('#newMovieButton').click(()=>{
-//     let movie = {};
-//     movie.title = $('#Title').value;
-//     movie.director = $('#Director').value;
-//     addAMovie(Title,Director);
-//     getMovies();
-// })
+
+
