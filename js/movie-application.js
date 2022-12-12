@@ -19,14 +19,17 @@ function getMovies(){
         .then(resp => resp.json())
         .then(data => {
             console.log(data);
-            for (let i = 0; i < data.length; i += 1) {
+            let report = data;
+            for (let i = 0; i < report.length; i++) {
                 console.log(data[i].title);
-                var html = "<div class='card'>";
-                html += "<div id='moviePoster'></div>";
+                let html = "<div class='card movieCard'>";
+                // html += "<div id='moviePoster'></div>";
                 html += "<div>";
-                html += "<h5 class=\"card-title\" id=\"title\">`${data[i].title}`</h5>";
+                html += "<h5 class='text-center'>" + report[i].title + "</h5>";
+                html += "</div>";
+                html += "</div>";
 
-                $('#movieCards').html(html)
+                $('#movieCards').append(html)
             }
         })
         .catch(error =>{
