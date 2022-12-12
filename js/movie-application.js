@@ -1,22 +1,32 @@
 "use strict";
 
-const testbtn = document.getElementById("newMovieButton");
+const searchbtn = document.getElementById("newMovieButton");
 
-testbtn.addEventListener("click",() => {
-    fetch(`https://foregoing-dashing-gibbon.glitch.me/movies`)
-        .then(resp => resp.json())
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error =>{
-            console.log("error");
-            console.log(error);
-        })
+searchbtn.addEventListener("click", () => {
+    function addAMovie(Title, Director) {
+        const reviewObj = {
+            title: Title,
+            director: Director,
+            rating: 5,
+            comments: "Please add a review"
+        };
+        const url = 'https://foregoing-dashing-gibbon.glitch.me/movies';
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(reviewObj),
+        };
+        fetch(url, options)
+            .then(response => console.log(response)) /* review was created successfully */
+            .catch(error => console.error(error)); /* handle errors */
+    }
 });
 
-function getMovies(){
+function getMovies() {
     let loader = `<div class="loading text-center"><h1 class="fs-1">Loading...</h1></div>`
-    document.getElementById('movieCards').innerHTML =loader;
+    document.getElementById('movieCards').innerHTML = loader;
     fetch(`https://foregoing-dashing-gibbon.glitch.me/movies`)
         .then(resp => resp.json())
         .then(data => {
@@ -40,7 +50,7 @@ function getMovies(){
                 html += "</div>"
                 html += "<div>";
                 html += "<h5 class='text-center'>" + report[i].genre + "</h5>";
-                html += "<p class='text-center'>"+ report[i].comments + " </p>"
+                html += "<p class='text-center'>" + report[i].comments + " </p>"
                 html += "</div>";
                 html += "</div>";
 
@@ -48,12 +58,40 @@ function getMovies(){
                 $('.loading').html("")
             }
         })
-        .catch(error =>{
+        .catch(error => {
             console.log("error");
             console.log(error);
         })
 }
 
+function addAMovie(Title, Director) {
+    const reviewObj = {
+        title: Title,
+        director: Director,
+        rating: 5,
+        comments: "Please add a review"
+    };
+    const url = 'https://foregoing-dashing-gibbon.glitch.me/movies';
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reviewObj),
+    };
+    fetch(url, options)
+        .then(response => console.log(response)) /* review was created successfully */
+        .catch(error => console.error(error)); /* handle errors */
+}
 
 getMovies();
 
+addAMovie("avengers","Joe Russo");
+
+// $('#newMovieButton').click(()=>{
+//     let movie = {};
+//     movie.title = $('#Title').value;
+//     movie.director = $('#Director').value;
+//     addAMovie(Title,Director);
+//     getMovies();
+// })
