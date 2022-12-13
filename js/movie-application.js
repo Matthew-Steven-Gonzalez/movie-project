@@ -28,14 +28,18 @@ function getMovies() {
                 html += "<p class='text-center'>" + report[i].plot + " </p>"
                 html += "<h6 class='text-center'>" + report[i].director + " </h6>"
                 html += "</div>";
-                html += "<button type='button' class='w-25 mx-auto' id='deleteButton" + report[i].id + "' ><i class=\"fa-solid fa-trash\"></i></button>"
+                html += "<button type='button' class='w-25 mx-auto delete' value='"+ report[i].id + "'><i class=\"fa-solid fa-trash\"></i></button>"
                 html += "</div>"
                 $('#movieCards').append(html)
                 $('.loading').html("")
 
-            } $('#deleteButton1').click((e)=>{
-                e.preventDefault();
-                console.log("test");
+            }
+            console.log($(".delete"));
+            $(".delete").on("click",function(){
+                // $(this).css("background","red");
+                console.log($(this).val());
+                deleteAMovie($(this).val());
+                getMovies();
             })
         })
         .catch(error => {
@@ -77,6 +81,8 @@ $('#newMovieButton').click((e)=>{
     movie.director = $('#Director').val();
     console.log(movie);
     addAMovie(movie);
+    getMovies();
+
 })
 
 
