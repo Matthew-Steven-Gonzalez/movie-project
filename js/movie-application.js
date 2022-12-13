@@ -82,7 +82,23 @@ $('#newMovieButton').click((e)=>{
     console.log(movie);
     addAMovie(movie);
     getMovies();
+})
 
+// OMDb API GET Request
+$(document).ready(function (){
+
+    $('#movieForm').submit(function (e){
+        e.preventDefault()
+        let movie = $('#movie').val()
+        let url = `http://www.omdbapi.com/?`
+
+        $.ajax({
+            method: 'GET',
+            url: `${url}t=${movie}&apikey=${OMDKEY}`,
+        }).done(function (data){
+            console.log(data);
+        })
+    })
 })
 
 
