@@ -28,7 +28,7 @@ function getMovies() {
                 html += "<p class='text-center'>" + report[i].plot + " </p>"
                 html += "<h6 class='text-center'>" + report[i].director + " </h6>"
                 html += "</div>";
-                html += "<button class='w-25 mx-auto'>Delete</button>"
+                html += "<button class='w-25 mx-auto'><i class=\"fa-solid fa-trash\"></i></button>"
                 html += "</div>";
 
                 $('#movieCards').append(html)
