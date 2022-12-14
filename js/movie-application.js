@@ -19,8 +19,9 @@ function getMovies() {
                 html += "<h6 class='r'>" + report[i].director + " </h6>"
                 html += "</div class=>";
                 html += "<div class='row'>";
-                html += "<button type='button' class='w-25 mx-auto delete' value='"+ report[i].id + "'><i class=\"fa-solid fa-trash\"> delete</i></button>"
-                html += "<button type='button' class='w-25 mx-auto edit' data-bs-toggle='modal' data-bs-target='#exampleModal' value='"+ report[i].id + "'><i class=\"fa-solid fa-pen-to-square\"> edit</i></button>"
+                html += "<button type='button' class='w-25 mx-auto delete' value='"+ i + "'><i class=\"fa-solid fa-trash\"> delete</i></button>"
+                html += "<button type='button' class='w-25 mx-auto edit' data-bs-toggle='modal' data-bs-target='#exampleModal' value='"+ i + "'><i class=\"fa-solid fa-pen-to-square\"> edit</i></button>"
+                html += "<input type='hidden' class='movie-id' value='" + report[i].id + "'>"
                 html += "</div>"
                 $('#movieCards').append(html)
                 $('.loading').html("")
@@ -29,25 +30,24 @@ function getMovies() {
             $(".delete").on("click",function(){
                 // $(this).css("background","red");
                 console.log($(this).val());
-                deleteAMovie($(this).val());
+                deleteAMovie($(this).parent().children().last().val());
 
             })
             $(".edit").on("click",function(){
-                // $(this).css("background","red");
                 console.log($(this).val());
+                let edittedmovie = {};
                 // Prepopulate the title in edit form
-                let titles = report[$(this).val()-1].title;
+                let titles = report[$(this).val()].title;
                 document.getElementById('editTitle').setAttribute('value', titles);
                 // Prepopulate the rating in edit form
-                let ratings = report[$(this).val()-1].rating;
+                let ratings = report[$(this).val()].rating;
                 document.getElementById('editRating').setAttribute('value', ratings);
                 // // Prepopulate the genres in edit form
-                let genres = report[$(this).val()-1].genre;
+                let genres = report[$(this).val()].genre;
                 document.getElementById('editGenres').setAttribute('value', genres);
                 // // Prepopulate the director in edit form
-                let directors = report[$(this).val()-1].director;
+                let directors = report[$(this).val()].director;
                 document.getElementById('editDirector').setAttribute('value', directors);
-
 
             })
         })
@@ -74,7 +74,21 @@ function addAMovie(movie) {
 function deleteAMovie(index){
     const url = 'https://foregoing-dashing-gibbon.glitch.me/movies/'+index +'';
     const options = {
-        method: 'delete',
+        method: 'DELETE',
+    };
+    return fetch(url, options)
+        .then(response => console.log(response)) /* review was created successfully */
+        .catch(error => console.error(error)); /* handle errors */
+}
+
+function editAMovie(index, edittedMovie){
+    const url = 'https://foregoing-dashing-gibbon.glitch.me/movies/'+index +'';
+    const options = {
+        method: "PATCH",
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body : JSON.stringify(edittedMovie)
     };
     return fetch(url, options)
         .then(response => console.log(response)) /* review was created successfully */
@@ -91,9 +105,10 @@ $('#newMovieButton').click((e)=>{
     movie.director = $('#Director').val();
     movie.genre = $('#Genres').val();
     console.log(movie);
-    addAMovie(movie).then(getMovies);
+    addAMovie(movie);
 
 })
+
 
 // OMDb API GET Request
 $(document).ready(function (){
