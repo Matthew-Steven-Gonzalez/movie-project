@@ -15,6 +15,7 @@
                     html += "<h2>" +report[i].rating + " / 10 Potatoes</h2>";
                     html += "<h5 class=''>" + report[i].genre + "</h5>";
                     html += "<p class=''>" + report[i].plot + " </p>"
+                    html += "<p class='mb-3'>Directed by: </p>"
                     html += "<h6 class='r'>" + report[i].director + " </h6>"
                     html += "</div class=>";
                     html += "<div class='row'>";
