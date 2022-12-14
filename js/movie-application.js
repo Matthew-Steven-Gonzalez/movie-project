@@ -35,8 +35,18 @@ function getMovies() {
             $(".edit").on("click",function(){
                 // $(this).css("background","red");
                 console.log($(this).val());
-                let title = report[$(this).val()-1].title;
-                document.getElementById('editTitle').setAttribute('value', title);
+                // Prepopulate the title in edit form
+                let titles = report[$(this).val()-1].title;
+                document.getElementById('editTitle').setAttribute('value', titles);
+                // Prepopulate the rating in edit form
+                let ratings = report[$(this).val()-1].rating;
+                document.getElementById('editRating').setAttribute('value', ratings);
+                // // Prepopulate the genres in edit form
+                let genres = report[$(this).val()-1].genre;
+                document.getElementById('editGenres').setAttribute('value', genres);
+                // // Prepopulate the director in edit form
+                let directors = report[$(this).val()-1].director;
+                document.getElementById('editDirector').setAttribute('value', directors);
 
 
             })
