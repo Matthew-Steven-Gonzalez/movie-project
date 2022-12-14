@@ -87,8 +87,8 @@ function addAMovie(movie) {
         body: JSON.stringify(movie),
     };
     return fetch(url, options)
-        .then(response => console.log(response)) /* review was created successfully */
-        .catch(error => console.error(error)); /* handle errors */
+        .then(response => console.log(response))
+        .catch(error => console.error(error));
 }
 
 function deleteAMovie(index){
@@ -97,8 +97,8 @@ function deleteAMovie(index){
         method: 'DELETE',
     };
     return fetch(url, options)
-        .then(response => console.log(response)) /* review was created successfully */
-        .catch(error => console.error(error)); /* handle errors */
+        .then(response => console.log(response))
+        .catch(error => console.error(error));
 }
 
 function editAMovie(index, modMovie){
@@ -123,6 +123,8 @@ $('#newMovieButton').click((e)=>{
     movie.rating = $('#Rating').val();
     movie.director = $('#Director').val();
     movie.genre = $('#Genres').val();
+    movie.plot = $('#plot').val();
+    movie.image = $('#image').val();
     console.log(movie);
     addAMovie(movie);
 
