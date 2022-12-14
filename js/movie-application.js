@@ -9,37 +9,36 @@ function getMovies() {
             console.log(data);
             let report = data;
             for (let i = 0; i < report.length; i++) {
-                let html = "<div class='card movieCard col-10 mx-auto'>";
-                html += "<h2 class='text-center mt-1' id='MovieTitle'>" + report[i].title + "</h2>";
+                let html = "<div class='card movieCard col-10 mx-auto text-center'>";
+                html += "<h2 class=' mt-1' id='MovieTitle'>" + report[i].title + "</h2>";
                 html += "<img src='" + report[i].image + "' class='image mx-auto' alt='Movie Poster'>";
                 html += "<div>";
-                html += "<ul class='list-group'>";
-                html += "<li class='list-group-item mx-auto' id='rating'>";
-                html += "<div class='rating'>";
-                html += "<i class='rating__star far fa-star'></i>"
-                html += "<i class='rating__star far fa-star'></i>"
-                html += "<i class='rating__star far fa-star'></i>"
-                html += "<i class='rating__star far fa-star'></i>"
-                html += "<i class='rating__star far fa-star'></i>"
-                html += "</div>"
-                html += "</div>"
-                html += "<div>";
-                html += "<h5 class='text-center'>" + report[i].genre + "</h5>";
-                html += "<p class='text-center'>" + report[i].plot + " </p>"
-                html += "<h6 class='text-center'>" + report[i].director + " </h6>"
-                html += "</div>";
-                html += "<button type='button' class='w-25 mx-auto delete' value='"+ report[i].id + "'><i class=\"fa-solid fa-trash\"></i></button>"
+                html += "<h2>" +report[i].rating + " / 10 Potatoes</h2>";
+                html += "<h5 class=''>" + report[i].genre + "</h5>";
+                html += "<p class=''>" + report[i].plot + " </p>"
+                html += "<h6 class='r'>" + report[i].director + " </h6>"
+                html += "</div class=>";
+                html += "<div class='row'>";
+                html += "<button type='button' class='w-25 mx-auto delete' value='"+ report[i].id + "'><i class=\"fa-solid fa-trash\"> delete</i></button>"
+                html += "<button type='button' class='w-25 mx-auto edit' data-bs-toggle='modal' data-bs-target='#exampleModal' value='"+ report[i].id + "'><i class=\"fa-solid fa-pen-to-square\"> edit</i></button>"
                 html += "</div>"
                 $('#movieCards').append(html)
                 $('.loading').html("")
 
             }
-            console.log($(".delete"));
             $(".delete").on("click",function(){
                 // $(this).css("background","red");
                 console.log($(this).val());
                 deleteAMovie($(this).val());
-                getMovies();
+
+            })
+            $(".edit").on("click",function(){
+                // $(this).css("background","red");
+                console.log($(this).val());
+                let title = report[$(this).val()-1].title;
+                document.getElementById('editTitle').setAttribute('value', title);
+
+
             })
         })
         .catch(error => {
@@ -57,7 +56,7 @@ function addAMovie(movie) {
         },
         body: JSON.stringify(movie),
     };
-    fetch(url, options)
+    return fetch(url, options)
         .then(response => console.log(response)) /* review was created successfully */
         .catch(error => console.error(error)); /* handle errors */
 }
@@ -67,7 +66,7 @@ function deleteAMovie(index){
     const options = {
         method: 'delete',
     };
-    fetch(url, options)
+    return fetch(url, options)
         .then(response => console.log(response)) /* review was created successfully */
         .catch(error => console.error(error)); /* handle errors */
 }
@@ -78,18 +77,20 @@ $('#newMovieButton').click((e)=>{
     e.preventDefault();
     let movie ={};
     movie.title = $('#Title').val();
+    movie.rating = $('#Rating').val();
     movie.director = $('#Director').val();
+    movie.genre = $('#Genres').val();
     console.log(movie);
-    addAMovie(movie);
-    getMovies();
+    addAMovie(movie).then(getMovies);
+
 })
 
 // OMDb API GET Request
 $(document).ready(function (){
 
-    $('#movieForm').submit(function (e){
+    $('#searchButton').submit(function (e){
         e.preventDefault()
-        let movie = $('#movie').val()
+        let movie = $('#movieSearch').val();
         let url = `http://www.omdbapi.com/?`
 
         $.ajax({
@@ -97,6 +98,8 @@ $(document).ready(function (){
             url: `${url}t=${movie}&apikey=${OMDKEY}`,
         }).done(function (data){
             console.log(data);
+            let movie = data;
+            console.log(movie.plot);
         })
     })
 })

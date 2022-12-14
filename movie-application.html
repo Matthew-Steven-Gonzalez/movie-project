@@ -13,13 +13,43 @@
     <div class="container-fluid">
         <a class="navbar-brand text-danger fs-2">Moldy Potatoes</a>
         <a class= "text-danger align-items-center" href="#addAMovie"><p>Add a Movie</p></a>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search movies..." aria-label="Search">
-            <button class="btn btn-outline-light" type="submit">Search</button>
+        <form class="d-flex" role="search" id="searchButton">
+            <input class="form-control me-2" type="search" placeholder="Search movies..." aria-label="Search" id="movieSearch">
+            <button class="btn btn-outline-light" type="submit" >Search</button>
         </form>
     </div>
-
 </nav>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group d-flex mb-5" id="addAMovieForm">
+                <h3 class="text-center "> Edit A Movie!</h3>
+                <span class="input-group-text justify-content-center">Title:</span>
+                <input type="text" aria-label="First name" class="form-control w-100" id="editTitle">
+                <span class="input-group-text justify-content-center">Rating(out of 10):</span>
+                <input type="text" aria-label="First name" class="form-control w-100" id="editRating">
+                <span class="input-group-text justify-content-center">Genres:</span>
+                <input type="text" aria-label="First name" class="form-control w-100" id="Genres">
+                <span class="input-group-text justify-content-center">Director:</span>
+                <input type="text" aria-label="First name" class="form-control w-100" id="Director">
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="movieCards" class="">
 <!--    <div class="card" style="width: 18rem;">-->
 <!--&lt;!&ndash;        <img src="..." class="card-img-top" alt="...">&ndash;&gt;-->
@@ -48,14 +78,18 @@
 <div id="addAMovie" class="card"></div>
 
 <div class="container mt-3">
-    <div class="input-group d-flex" id="addAMovieForm">
+    <div class="input-group d-flex mb-5" id="addAMovieForm">
         <h3 class="text-center text-white"> Add A Movie!</h3>
         <span class="input-group-text justify-content-center">Title:</span>
         <input type="text" aria-label="First name" class="form-control w-100" id="Title">
+        <span class="input-group-text justify-content-center">Rating(out of 10):</span>
+        <input type="text" aria-label="First name" class="form-control w-100" id="Rating">
+        <span class="input-group-text justify-content-center">Genres:</span>
+        <input type="text" aria-label="First name" class="form-control w-100" id="Genres">
         <span class="input-group-text justify-content-center">Director:</span>
         <input type="text" aria-label="First name" class="form-control w-100" id="Director">
-        <button type="submit" aria-label="newMovieButton" class="btn-light" id="newMovieButton">Submit</button>
     </div>
+    <button type="submit" aria-label="newMovieButton" class="btn-light w-100" id="newMovieButton">Submit</button>
 </div>
 
 
@@ -64,6 +98,7 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
             integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous" rel="script"></script>
     <script src="js/movie-application.js"></script>
+    <script src="./keys/keys.js"></script>
 
 </div>
 </body>
