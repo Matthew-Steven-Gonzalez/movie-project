@@ -28,27 +28,38 @@ function getMovies() {
 
             }
             $(".delete").on("click",function(){
-                // $(this).css("background","red");
                 console.log($(this).val());
                 deleteAMovie($(this).parent().children().last().val());
 
             })
             $(".edit").on("click",function(){
                 console.log($(this).val());
-                let edittedmovie = {};
+                let edit = {};
                 // Prepopulate the title in edit form
-                let titles = report[$(this).val()].title;
-                document.getElementById('editTitle').setAttribute('value', titles);
+                edit.titles = report[$(this).val()].title;
+                document.getElementById('editTitle').setAttribute('value', edit.titles);
                 // Prepopulate the rating in edit form
-                let ratings = report[$(this).val()].rating;
-                document.getElementById('editRating').setAttribute('value', ratings);
+                edit.rating = report[$(this).val()].rating;
+                document.getElementById('editRating').setAttribute('value', edit.rating);
                 // // Prepopulate the genres in edit form
-                let genres = report[$(this).val()].genre;
-                document.getElementById('editGenres').setAttribute('value', genres);
+                edit.genres = report[$(this).val()].genre;
+                document.getElementById('editGenres').setAttribute('value', edit.genres);
                 // // Prepopulate the director in edit form
-                let directors = report[$(this).val()].director;
-                document.getElementById('editDirector').setAttribute('value', directors);
+                edit.directors = report[$(this).val()].director;
+                document.getElementById('editDirector').setAttribute('value', edit.directors);
+                console.log(edit);
 
+            })
+            $("#edits").click(function(e){
+                e.preventDefault();
+                let editedMovie = {
+                    title:$("#editTitle").val(),
+                    rating:$("#editRating").val(),
+                    genres:$("#editGenres").val(),
+                    director:$("#editDirector").val()
+                };
+                console.log(editedMovie);
+                editAMovie($(this).parent().children().last().val(),editedMovie);
             })
         })
         .catch(error => {
@@ -81,14 +92,14 @@ function deleteAMovie(index){
         .catch(error => console.error(error)); /* handle errors */
 }
 
-function editAMovie(index, edittedMovie){
-    const url = 'https://foregoing-dashing-gibbon.glitch.me/movies/'+index +'';
+function editAMovie(index, modMovie){
+    const url = 'https://foregoing-dashing-gibbon.glitch.me/movies/'+ index +'';
     const options = {
         method: "PATCH",
         headers: {
-            'Content-type': 'application/json'
+            'Content-Type': 'application/json'
         },
-        body : JSON.stringify(edittedMovie)
+        body : JSON.stringify(modMovie)
     };
     return fetch(url, options)
         .then(response => console.log(response)) /* review was created successfully */
