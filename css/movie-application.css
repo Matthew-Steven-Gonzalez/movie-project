@@ -7,9 +7,20 @@
     display: flex;
     flex-direction: column;
 }
+#editAMovieForm{
+    display: flex;
+    flex-direction: column;
+}
 
 #MovieTitle{
     border-radius: 5px;
+}
+
+#WebsiteName {
+    font-size: 45px;
+    font-family: fantasy;
+    color: #EBE8E2;
+    margin-top: 25px;
 }
 
 .movieCard{

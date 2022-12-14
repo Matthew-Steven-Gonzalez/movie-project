@@ -9,7 +9,7 @@ function getMovies() {
             console.log(data);
             let report = data;
             for (let i = 0; i < report.length; i++) {
-                let html = "<div class='card movieCard col-10 mx-auto text-center'>";
+                let html = "<div class='card movieCard col-6 mx-auto text-center'>";
                 html += "<h2 class=' mt-1' id='MovieTitle'>" + report[i].title + "</h2>";
                 html += "<img src='" + report[i].image + "' class='image mx-auto' alt='Movie Poster'>";
                 html += "<div>";
@@ -20,7 +20,7 @@ function getMovies() {
                 html += "</div class=>";
                 html += "<div class='row'>";
                 html += "<button type='button' class='w-25 mx-auto delete' value='"+ i + "'><i class=\"fa-solid fa-trash\"> delete</i></button>"
-                html += "<button type='button' class='w-25 mx-auto edit' data-bs-toggle='modal' data-bs-target='#exampleModal' value='"+ i + "'><i class=\"fa-solid fa-pen-to-square\"> edit</i></button>"
+                html += "<button type='button' class='w-25 mx-auto edit' data-bs-toggle='modal' data-bs-target='#myModal' value='"+ i + "'><i class=\"fa-solid fa-pen-to-square\"> edit</i></button>"
                 html += "<input type='hidden' class='movie-id' value='" + report[i].id + "'>"
                 html += "</div>"
                 $('#movieCards').append(html)
@@ -29,7 +29,7 @@ function getMovies() {
             }
             $(".delete").on("click",function(){
                 console.log($(this).val());
-                deleteAMovie($(this).parent().children().last().val());
+                deleteAMovie($(this).parent().children().last().val()).then(getMovies);
 
             })
             $(".edit").on("click",function(){
@@ -47,6 +47,12 @@ function getMovies() {
                 // // Prepopulate the director in edit form
                 edit.directors = report[$(this).val()].director;
                 document.getElementById('editDirector').setAttribute('value', edit.directors);
+                edit.plot = report[$(this).val()].plot;
+                document.getElementById('editPlot').setAttribute('value', edit.plot);
+                edit.image = report[$(this).val()].image;
+                document.getElementById('editImage').setAttribute('value', edit.image);
+                edit.id = report[$(this).val()].id;
+                document.getElementById("editId").setAttribute('value',edit.id);
                 console.log(edit);
 
             })
@@ -56,10 +62,13 @@ function getMovies() {
                     title:$("#editTitle").val(),
                     rating:$("#editRating").val(),
                     genres:$("#editGenres").val(),
-                    director:$("#editDirector").val()
+                    director:$("#editDirector").val(),
+                    plot:$("#editPlot").val(),
+                    image:$("#editImage").val()
                 };
                 console.log(editedMovie);
-                editAMovie($(this).parent().children().last().val(),editedMovie);
+                console.log($(this).parent().children().last().val());
+                editAMovie($("#editId").val(),editedMovie).then(getMovies);
             })
         })
         .catch(error => {
@@ -102,8 +111,7 @@ function editAMovie(index, modMovie){
         body : JSON.stringify(modMovie)
     };
     return fetch(url, options)
-        .then(response => console.log(response)) /* review was created successfully */
-        .catch(error => console.error(error)); /* handle errors */
+
 }
 
 getMovies();

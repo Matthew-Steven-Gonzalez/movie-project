@@ -10,28 +10,28 @@
 <body id="background">
 
 <nav class="navbar bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand text-danger fs-2">Moldy Potatoes</a>
-        <a class= "text-danger align-items-center" href="#addAMovie"><p>Add a Movie</p></a>
-        <form class="d-flex" role="search" id="searchButton">
-            <input class="form-control me-2" type="search" placeholder="Search movies..." aria-label="Search" id="movieSearch">
-            <button class="btn btn-outline-light" type="submit" >Search</button>
-        </form>
+    <div class="container-fluid justify-content-center">
+        <h1 class=" " id="WebsiteName">Moldy Potatoes</h1>
     </div>
+</nav>
+<nav>
+    <form class="d-flex" role="search" id="searchButton">
+        <input class="form-control me-2" type="search" placeholder="Search movies..." aria-label="Search" id="movieSearch">
+        <button class="btn btn-outline-light" type="submit" >Search</button>
+    </form>
 </nav>
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5 " id="ModalLabel">Edit a Movie</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="input-group d-flex mb-5" id="addAMovieForm">
-                <h3 class="text-center "> Edit A Movie!</h3>
+                <div class="input-group d-flex mb-5" id="editAMovieForm">
                 <span class="input-group-text justify-content-center">Title:</span>
                 <input type="text" aria-label="First name" class="form-control w-100" id="editTitle">
                 <span class="input-group-text justify-content-center">Rating(out of 10):</span>
@@ -40,6 +40,11 @@
                 <input type="text" aria-label="First name" class="form-control w-100" id="editGenres">
                 <span class="input-group-text justify-content-center">Director:</span>
                 <input type="text" aria-label="First name" class="form-control w-100" id="editDirector">
+                <span class="input-group-text justify-content-center">Plot:</span>
+                <input type="text" aria-label="First name" class="form-control w-100" id="editPlot">
+                <span class="input-group-text justify-content-center">Poster:</span>
+                <input type="text" aria-label="First name" class="form-control w-100" id="editImage">
+                <input type='hidden' id="editId" >
             </div>
             </div>
             <div class="modal-footer">
@@ -51,28 +56,7 @@
 </div>
 
 <div id="movieCards" class="">
-<!--    <div class="card" style="width: 18rem;">-->
-<!--&lt;!&ndash;        <img src="..." class="card-img-top" alt="...">&ndash;&gt;-->
-<!--        <div class="card-body">-->
-<!--            <h5 class="card-title" id="title">Card title</h5>-->
-<!--            <p class="card-text" id="movieDescription">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-<!--        </div>-->
-<!--        <ul class="list-group list-group-flush">-->
-<!--            <li class="list-group-item" id="rating"><div class="rating">-->
-<!--                <i class="rating__star far fa-star"></i>-->
-<!--                <i class="rating__star far fa-star"></i>-->
-<!--                <i class="rating__star far fa-star"></i>-->
-<!--                <i class="rating__star far fa-star"></i>-->
-<!--                <i class="rating__star far fa-star"></i>-->
-<!--            </div></li>-->
-<!--            <li class="list-group-item" id="director">director</li>-->
-<!--            <li class="list-group-item" id="genres">genres</li>-->
-<!--        </ul>-->
-<!--        <div class="card-body">-->
-<!--            <a href="#" class="card-link" id="imdbLink">IMDB link</a>-->
-<!--            <a href="#" class="card-link" id="website">website link</a>-->
-<!--        </div>-->
-<!--    </div>-->
+
 </div>
 
 <div id="addAMovie" class="card"></div>
